@@ -7,9 +7,10 @@ public class InvadersMovement : MonoBehaviour
     [SerializeField] Invader[] prefabs;
     [SerializeField] int rows = 5;
     [SerializeField] int columns = 5;
-    [SerializeField] float speed = 0.01f;
+    [SerializeField] float speed = 0.1f;
     float _spacing = 0.8f;
     Vector3 _direction = Vector2.right;
+    float _edgeBorder = 0.5f;
     private void Awake()
     {
         for (int row = 0; row < rows; row++)
@@ -44,11 +45,11 @@ public class InvadersMovement : MonoBehaviour
                 continue;
             }
 
-            if(_direction == Vector3.right && invader.position.x >= (rightEdge.x - 0.3f))
+            if(_direction == Vector3.right && invader.position.x >= (rightEdge.x - _edgeBorder))
             {
                 MoveDown();
             }
-            else if (_direction == Vector3.left && invader.position.x <= (leftEdge.x + 0.3f))
+            else if (_direction == Vector3.left && invader.position.x <= (leftEdge.x + _edgeBorder))
             {
                 MoveDown();
             }
