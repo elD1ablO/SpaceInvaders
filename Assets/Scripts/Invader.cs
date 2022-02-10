@@ -4,13 +4,17 @@ public class Invader : MonoBehaviour
 {
     [SerializeField] Sprite[] animationSprites;
     [SerializeField] float animationTime = 1f;
-
+    
+    public System.Action killed;
     SpriteRenderer _spriteRenderer;
     int _animationFrame;
+
+    InGameMenu menu;
 
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        menu = FindObjectOfType<InGameMenu>();
     }
     void Start()
     {
@@ -28,5 +32,15 @@ public class Invader : MonoBehaviour
 
         _spriteRenderer.sprite = this.animationSprites[_animationFrame];
     }
-    
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Laser"))
+        {
+            killed.Invoke();
+            gameObject.SetActive(false);
+            menu.UpdateScore(1);
+        }
+    }
+
 }

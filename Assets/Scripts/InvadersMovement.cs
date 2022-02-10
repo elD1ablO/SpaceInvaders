@@ -5,12 +5,20 @@ using UnityEngine;
 public class InvadersMovement : MonoBehaviour
 {
     [SerializeField] Invader[] prefabs;
+    [SerializeField] Projectile missilePrefab;
     [SerializeField] int rows = 5;
     [SerializeField] int columns = 5;
-    [SerializeField] float speed = 0.1f;
+    [SerializeField] AnimationCurve speed;
+    [SerializeField] float missileAttackRate = 1f;
+    public int invadersKilled { get; private set; }    
+    public int totalInvaders => rows * columns;
+    public int invadersAlive => totalInvaders - invadersKilled;
+    public float percentKilled => (float)invadersKilled / (float)totalInvaders;
+
     float _spacing = 0.8f;
     Vector3 _direction = Vector2.right;
     float _edgeBorder = 0.5f;
+
     private void Awake()
     {
         for (int row = 0; row < rows; row++)
@@ -24,6 +32,7 @@ public class InvadersMovement : MonoBehaviour
             for (int col = 0; col < columns; col++)
             {
                 Invader invader = Instantiate(prefabs[row], transform);
+                invader.killed += InvaderKilled;
                 Vector3 position = rowPosition;
                 position.x += col * _spacing;
                 invader.transform.localPosition = position;
@@ -31,9 +40,14 @@ public class InvadersMovement : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        InvokeRepeating(nameof(MissileAttack),missileAttackRate, missileAttackRate);
+    }
+
     void Update()
     {
-        transform.position += _direction * speed * Time.deltaTime;
+        transform.position += _direction * speed.Evaluate(percentKilled) * Time.deltaTime;
 
         Vector3 leftEdge = Camera.main.ViewportToWorldPoint(Vector3.zero);
         Vector3 rightEdge = Camera.main.ViewportToWorldPoint(Vector3.right);
@@ -64,5 +78,26 @@ public class InvadersMovement : MonoBehaviour
         Vector3 position = transform.position;
         position.y -= _spacing;
         transform.position = position;
+    }
+
+    void MissileAttack()
+    {
+        foreach (Transform invader in transform)
+        {
+            if (!invader.gameObject.activeInHierarchy)
+            {
+                continue;
+            }
+
+            if (Random.value < (1f / (float)invadersAlive))
+            {
+                Instantiate(missilePrefab,invader.position, Quaternion.identity);
+                break;
+            }
+        }
+    }
+    void InvaderKilled()
+    {
+        invadersKilled++;
     }
 }
