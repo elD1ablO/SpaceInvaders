@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class InvadersMovement : MonoBehaviour
 {
+    InGameMenu menu;
+
     [SerializeField] Invader[] prefabs;
     [SerializeField] Projectile missilePrefab;
+
+    [SerializeField] AnimationCurve speed;    
+
+    [SerializeField] float missileAttackRate = 1f;
     [SerializeField] int rows = 5;
     [SerializeField] int columns = 5;
-    [SerializeField] AnimationCurve speed;
-    [SerializeField] float missileAttackRate = 1f;
+    
+    
     public int invadersKilled { get; private set; }    
     public int totalInvaders => rows * columns;
     public int invadersAlive => totalInvaders - invadersKilled;
@@ -21,6 +27,8 @@ public class InvadersMovement : MonoBehaviour
 
     private void Awake()
     {
+        menu = FindObjectOfType<InGameMenu>();
+
         for (int row = 0; row < rows; row++)
         {
             float width = _spacing * (columns - 1);
@@ -99,5 +107,10 @@ public class InvadersMovement : MonoBehaviour
     void InvaderKilled()
     {
         invadersKilled++;
+
+        if (invadersKilled == totalInvaders)
+        {
+            menu.GameOver();
+        }
     }
 }

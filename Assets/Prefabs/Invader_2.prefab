@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 326873991, guid: 40a1b62bc56a08d449abd9a582a41dc4, type: 3}
+      propertyPath: destroyParticles
+      value: 
+      objectReference: {fileID: 5336569277059084536, guid: d683be0fefaa2ab48867e4e8f0db205c, type: 3}
+    - target: {fileID: 326873991, guid: 40a1b62bc56a08d449abd9a582a41dc4, type: 3}
       propertyPath: animationSprites.Array.data[0]
       value: 
       objectReference: {fileID: 1797966416, guid: 3c643d1263092d4408a7d7d6bdef433c, type: 3}
@@ -19,6 +23,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1797966416, guid: 3c643d1263092d4408a7d7d6bdef433c, type: 3}
+    - target: {fileID: 518537304893507922, guid: 40a1b62bc56a08d449abd9a582a41dc4, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8861346
+      objectReference: {fileID: 0}
+    - target: {fileID: 518537304893507922, guid: 40a1b62bc56a08d449abd9a582a41dc4, type: 3}
+      propertyPath: m_Color.g
+      value: 0.35372016
+      objectReference: {fileID: 0}
+    - target: {fileID: 518537304893507922, guid: 40a1b62bc56a08d449abd9a582a41dc4, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9056604
+      objectReference: {fileID: 0}
     - target: {fileID: 3830263225361343243, guid: 40a1b62bc56a08d449abd9a582a41dc4, type: 3}
       propertyPath: m_Size.x
       value: 0.14

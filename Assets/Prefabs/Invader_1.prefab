@@ -11,6 +11,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 296472612, guid: 3c643d1263092d4408a7d7d6bdef433c, type: 3}
+    - target: {fileID: 125656628903624842, guid: 9bb334a72c086ef4daf57f3c827dbb5f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3978462
+      objectReference: {fileID: 0}
+    - target: {fileID: 125656628903624842, guid: 9bb334a72c086ef4daf57f3c827dbb5f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.72284484
+      objectReference: {fileID: 0}
+    - target: {fileID: 125656628903624842, guid: 9bb334a72c086ef4daf57f3c827dbb5f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 471852012086344287, guid: 9bb334a72c086ef4daf57f3c827dbb5f, type: 3}
+      propertyPath: destroyParticles
+      value: 
+      objectReference: {fileID: 5336569277059084536, guid: d683be0fefaa2ab48867e4e8f0db205c, type: 3}
     - target: {fileID: 471852012086344287, guid: 9bb334a72c086ef4daf57f3c827dbb5f, type: 3}
       propertyPath: animationSprites.Array.data[0]
       value: 

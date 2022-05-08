@@ -13,6 +13,9 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI finalScoreText;
+    //[SerializeField] TextMeshProUGUI timerText;
+
+    //int startDelay = 3;
     int score = 0;
 
     private void Awake()
@@ -22,7 +25,12 @@ public class InGameMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
     }
-    
+    void Start()
+    {
+        /*Time.timeScale = 0f;
+        StartCoroutine("StartDelay");*/        
+    }
+
     //scoring and lives increasing here
     public void UpdateScore(int amount)
     {
@@ -69,4 +77,36 @@ public class InGameMenu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    
+    /*void StartDelay()
+    {        
+        timerText.enabled = true;
+        Time.timeScale = 0f;
+        for (int i = startDelay; i < 4; i--)
+        {
+            timerText.text = i.ToString();
+            i -= (int)Time.time;            
+            if (i < 0)
+            {
+                timerText.enabled = false;
+                Time.timeScale = 1f;
+            }
+        }
+    }*/
+    /*IEnumerator StartDelay()
+    {
+        timerText.enabled = true;
+        for (int i = startDelay; i < 4; i--)
+        {            
+            timerText.text = i.ToString();            
+            startDelay -= (int)Time.time;
+            if (startDelay == 0)
+            {
+                timerText.enabled = false;
+                Time.timeScale = 1f;
+            }
+        }
+        yield return null;
+    }*/
+    
 }

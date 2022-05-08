@@ -3,6 +3,8 @@ using UnityEngine;
 public class Invader : MonoBehaviour
 {
     [SerializeField] Sprite[] animationSprites;
+    [SerializeField] GameObject destroyParticles;
+
     [SerializeField] float animationTime = 1f;
     
     public System.Action killed;
@@ -38,6 +40,7 @@ public class Invader : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("Laser"))
         {
             killed.Invoke();
+            Instantiate(destroyParticles,transform.position, Quaternion.identity);
             gameObject.SetActive(false);
             menu.UpdateScore(1);
         }

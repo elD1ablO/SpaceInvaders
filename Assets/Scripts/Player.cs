@@ -12,15 +12,21 @@ public class Player : MonoBehaviour
 
     float _border = 3f;
     float lives = 3;
+    float shootingRate = 1f;
+    float timeToNextShot;
+
 
     void Start()
     {
         menu = FindObjectOfType<InGameMenu>();
-        InvokeRepeating("Shoot", 1f, 1f);
+
+        //uncomment for shooting every shootingRate second.
+        //InvokeRepeating("Shoot", shootingRate, shootingRate);
     }
     void Update()
-    {        
-        if(Input.touchCount > 0)
+    {
+        //uncomment for movement with touchScreen
+        /*if(Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
@@ -39,21 +45,34 @@ public class Player : MonoBehaviour
                     transform.position += Vector3.right * speed * Time.deltaTime;
                 }
             }
-        }
+        }*/
         //uncomment for movement with keyboard keys
-        /*if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow || Touch))
-        {
-            transform.position += Vector3.left * speed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {            
+            if (transform.position.x > -_border)
+            {
+                transform.position += Vector3.left * speed * Time.deltaTime;
+            }
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {            
+            if (transform.position.x < _border)
+            {
+                transform.position += Vector3.right * speed * Time.deltaTime;
+            }
+        } 
+        if (Input.GetKeyDown(KeyCode.Space)&& timeToNextShot <= 0)
         {
-            transform.position += Vector3.right * speed * Time.deltaTime;
-        }      */  
+            
+            Shoot();
+        }
+        timeToNextShot -= Time.deltaTime;
     }
 
     void Shoot()
-    {        
-        Instantiate(laserPrefab, shootingPoint.position, Quaternion.identity);        
+    {
+        timeToNextShot = shootingRate;
+        Instantiate(laserPrefab, shootingPoint.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,8 +83,7 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
             menu.GameOver();
-        }
-        
+        }        
     }
 
 }

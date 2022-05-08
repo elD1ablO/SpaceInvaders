@@ -2364,8 +2364,6 @@ MonoBehaviour:
   - {fileID: 6666396397652091944, guid: 1726b629c78647b4dabd068d21b6cd94, type: 3}
   - {fileID: 6666396397652091944, guid: 1726b629c78647b4dabd068d21b6cd94, type: 3}
   missilePrefab: {fileID: 4618935359074594609, guid: 2a64c87d5a82e9a41ab71825a62ec13c, type: 3}
-  rows: 5
-  columns: 5
   speed:
     serializedVersion: 2
     m_Curve:
@@ -2400,6 +2398,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   missileAttackRate: 1
+  rows: 5
+  columns: 5
 --- !u!4 &1469618339
 Transform:
   m_ObjectHideFlags: 0
